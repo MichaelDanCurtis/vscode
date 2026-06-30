@@ -84,6 +84,7 @@ import { ChatErrorContentPart } from './chatContentParts/chatErrorContentPart.js
 import { ChatPlanReviewPart } from './chatContentParts/chatPlanReviewPart.js';
 import { ChatQuestionCarouselPart } from './chatContentParts/chatQuestionCarouselPart.js';
 import { ChatExtensionsContentPart } from './chatContentParts/chatExtensionsContentPart.js';
+import { ChatGenerativeUIInsetPart } from './chatContentParts/chatGenerativeUIInsetPart.js';
 import { ChatMarkdownContentPart, codeblockHasClosingBackticks } from './chatContentParts/chatMarkdownContentPart.js';
 import { ChatMcpServersInteractionContentPart } from './chatContentParts/chatMcpServersInteractionContentPart.js';
 import { ChatDisabledClaudeHooksContentPart } from './chatContentParts/chatDisabledClaudeHooksContentPart.js';
@@ -2471,6 +2472,8 @@ export class ChatListItemRenderer extends Disposable implements ITreeRenderer<Ch
 				return this.instantiationService.createInstance(ChatWorkspaceEditContentPart, content, context, this.chatContentMarkdownRenderer);
 			} else if (content.kind === 'externalEdit') {
 				return this.renderExternalEdit(content, context, templateData);
+			} else if (content.kind === 'generativeUIRuntimeInset') {
+				return this.instantiationService.createInstance(ChatGenerativeUIInsetPart, content, context);
 			}
 
 			return this.renderNoContent(other => content.kind === other.kind);
